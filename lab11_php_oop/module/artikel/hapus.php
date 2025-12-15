@@ -1,12 +1,9 @@
 <?php
+require_once __DIR__ . '/../../class/Database.php';
 $db = new Database();
 
 $id = $_GET['id'];
+$db->query("DELETE FROM artikel WHERE id=$id");
 
-$db->delete("artikel", "id=$id");
-
-echo "<script>
-        alert('Artikel berhasil dihapus!');
-        window.location='/lab11_php_oop/artikel/index';
-      </script>";
-?>
+header("Location: /lab11_php_oop/artikel/index");
+exit;

@@ -1,28 +1,23 @@
 <?php
+require_once __DIR__ . '/../../class/Database.php';
 $db = new Database();
-$form = new Form("/lab11_php_oop/artikel/tambah", "Simpan");
 
-// Jika form disubmit
 if ($_POST) {
     $judul = $_POST['judul'];
-    $isi = $_POST['isi'];
+    $isi   = $_POST['isi'];
 
-    // Insert ke database
-    $db->insert("artikel", [
-        'judul' => $judul,
-        'isi' => $isi
-    ]);
+    $db->query("INSERT INTO artikel (judul, isi)
+                VALUES ('$judul', '$isi')");
 
-    echo "<script>alert('Artikel berhasil ditambahkan!'); window.location='/lab11_php_oop/artikel/index';</script>";
+    header("Location: /lab11_php_oop/artikel/index");
+    exit;
 }
-
-// Form input
-$form->addField("judul", "Judul Artikel");
-$form->addField("isi", "Isi Artikel", "textarea");
-
 ?>
 
 <h3>Tambah Artikel</h3>
-<?php
-$form->displayForm();
-?>
+
+<form method="post">
+    <input type="text" name="judul" placeholder="Judul" required><br><br>
+    <textarea name="isi" placeholder="Isi artikel" rows="5" required></textarea><br><br>
+    <button>Simpan</button>
+</form>

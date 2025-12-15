@@ -1,42 +1,25 @@
 <?php
+require_once __DIR__ . '/../../class/Database.php';
 $db = new Database();
 
-// Ambil ID dari URL
 $id = $_GET['id'];
+$data = $db->query("SELECT * FROM artikel WHERE id=$id")->fetch_assoc();
 
-// Ambil data artikel berdasarkan ID
-$data = $db->get("artikel", "id=$id");
-
-$form = new Form("/lab11_php_oop/artikel/ubah?id=$id", "Update");
-
-// Jika form disubmit
 if ($_POST) {
     $judul = $_POST['judul'];
-    $isi = $_POST['isi'];
+    $isi   = $_POST['isi'];
 
-    $db->update("artikel", [
-        'judul' => $judul,
-        'isi' => $isi
-    ], "id=$id");
+    $db->query("UPDATE artikel SET judul='$judul', isi='$isi' WHERE id=$id");
 
-    echo "<script>alert('Artikel berhasil diupdate!'); window.location='/lab11_php_oop/artikel/index';</script>";
+    header("Location: /lab11_php_oop/artikel/index");
+    exit;
 }
-
-// Isi form dengan data lama
 ?>
 
-<h3>Ubah Artikel</h3>
+<h3>Edit Artikel</h3>
 
-<?php
-// Field
-echo "<form method='POST'>";
-echo "<table>";
-
-echo "<tr><td>Judul</td><td><input type='text' name='judul' value='" . $data['judul'] . "'></td></tr>";
-echo "<tr><td>Isi</td><td><textarea name='isi' rows='4' cols='30'>" . $data['isi'] . "</textarea></td></tr>";
-
-echo "<tr><td></td><td><input type='submit' value='Update'></td></tr>";
-
-echo "</table>";
-echo "</form>";
-?>
+<form method="post">
+    <input type="text" name="judul" value="<?= $data['judul'] ?>" required><br><br>
+    <textarea name="isi" rows="5" required><?= $data['isi'] ?></textarea><br><br>
+    <button>Update</button>
+</form>
