@@ -10,7 +10,8 @@ lab11_php_oop/
 │     ├── index.php
 │     ├── tambah.php
 │     ├── ubah.php
-│
+│── artikel/
+|     ├── index.php
 └── template/
       ├── header.php
       ├── footer.php
@@ -46,6 +47,15 @@ Routing di index.php
 header.php → judul halaman
 footer.php → copyright
 sidebar.php → menu navigasi
+
+# penambahan halaman login
+<img width="1919" height="1005" alt="image" src="https://github.com/user-attachments/assets/16089506-570e-43c6-a041-c3ca56be4986" />
+
+Fitur login digunakan untuk membatasi akses pengguna ke sistem. Autentikasi dilakukan menggunakan username dan password yang tersimpan di database. Password diamankan dengan hashing bcrypt dan diverifikasi menggunakan password_verify(). Jika login berhasil, pengguna diarahkan ke halaman utama, jika gagal akan muncul pesan kesalahan.
+<img width="1919" height="935" alt="image" src="https://github.com/user-attachments/assets/cd576849-fc05-448a-a325-f0782eded82b" />
+
+# logout
+<img width="1919" height="1012" alt="image" src="https://github.com/user-attachments/assets/0cfd3641-714d-4a26-a04b-3ace9cd496cd" />
 
 
 
